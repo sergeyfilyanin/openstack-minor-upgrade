@@ -1,0 +1,73 @@
+  - name: Prepare for update for overcloud images
+    shell: |
+        rm -rf ~/images/*
+        cd ~/images
+        for i in /usr/share/rhosp-director-images/overcloud-full-latest-13.0.tar /usr/share/rhosp-director-images/ironic-python-agent-latest-13.0.tar; do tar -xvf $i; done
+        
+  - name: Updating the overcloud images
+    shell: |
+        source ~/stackrc
+        openstack overcloud image upload --update-existing --image-path /home/stack/images/
+        openstack overcloud node configure $(openstack baremetal node list -c UUID -f value)
+       
+  - name: Verify the existence of the new images
+    shell: |
+        openstack image list
+    register: results_image_list
+  - debug:
+      var: results_image_list.stdout_lines
+
+  - name: Verify results
+    pause:
+      prompt: Please check openstack image list! Press return to continue. Press Ctrl+c and then "a" to abort
+
+  - name: Create update env file
+    shell: |
+        source ~/stackrc
+        touch ~/templates/updates-environment.yaml
+
+  - name: Clear your database entries
+    shell: |
+        sudo docker exec -u 42436 -ti nova_api_cron bash
+        nova-manage db archive_deleted_rows --max_rows 1000
+        exit
+
+  - name: Edit updates-environment.yaml
+    ansible.builtin.blockinfile:
+      path: /home/stack/templates/updates-environment.yaml
+      block: |2
+          parameter_defaults:
+            DockerPuppetProcessCount: 8
+
+  - name: Verify updates-environment.yaml
+    shell: |
+        cat /home/stack/templates/updates-environment.yaml
+    register: results_env
+  - debug:
+      var: results_env.stdout_lines
+
+  - name: Verify results
+    pause:
+      prompt: Please check updates environment yaml! Press return to continue. Press Ctrl+c and then "a" to abort
+
+  - name: Create update env file
+    shell: |
+        source ~/stackrc
+        tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml
+
+  - name: Edit updates-environment.yaml
+    ansible.builtin.blockinfile:
+      path: /home/stack/templates/updates-environment.yaml
+      block: |2
+        - hosts: all
+          gather_facts: false
+          tasks:
+            - name: Pre-download all packages on all overcloud nodes
+              shell:
+                yum upgrade -y --downloadonly
+              become: true
+
+  - name: Run playbook
+    shell: |
+        source ~/stackrc
+        ansible-playbook -i ~/inventory.yaml -f 20 ~/yum-download-only.yaml --limit Controller,Compute,CephStorage
