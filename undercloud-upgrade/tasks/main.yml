@@ -7,7 +7,7 @@
              
   - name: Upgrade director
     shell: |
-        nohup openstack undercloud upgrade &
+        openstack undercloud upgrade --log-file undercloud_minor_upgrade.log
 
   - name: Reboot approve 
     pause:
