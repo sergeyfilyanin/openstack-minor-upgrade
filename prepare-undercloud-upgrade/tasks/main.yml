@@ -1,7 +1,7 @@
   - name: Updating your container image source
     shell: |
         source ~/stackrc
-        docker login https://registry.redhat.io --username envops --password 'Unix_11!'
+        sudo docker login registry.redhat.io --username envops --password 'Unix_11!'
         sudo openstack overcloud container image prepare --namespace=registry.redhat.io/rhosp13 --prefix=openstack- --tag-from-label {version}-{release} --output-env-file=/home/stack/templates/overcloud_images.yaml
 
   - name: Insert docker credentionals 
