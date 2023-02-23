@@ -1,3 +1,10 @@
+  - name: Log into redhat registry
+    docker_login:
+      registry: registry.redhat.io
+      username: envops
+      password: Unix_11!
+
+
   - name: Updating your container image source
     shell: |
         source ~/stackrc
