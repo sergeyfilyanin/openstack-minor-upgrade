@@ -21,9 +21,9 @@
     become_user: root
   - debug: msg="Undercloud was restarted successfully"
 
-  - name: Upgrade director
+  - name: List services
     shell: |
-        sudo systemctl list-units 'openstack-*
+        sudo systemctl list-units 'openstack-*'
     register: results
   - debug:
       var: results.stdout_lines
