@@ -33,7 +33,7 @@
                 DEFROUTE=no
               become: true
  
-             - name: Add defroute
+            - name: Add defroute
               ansible.builtin.blockinfile:
               path: /etc/sysconfig/network-scripts/ifcfg-br-ex
               block: |
