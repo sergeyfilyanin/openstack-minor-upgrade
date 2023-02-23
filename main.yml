@@ -7,4 +7,3 @@
   roles:
     - prepare-undercloud-upgrade
     - undercloud-upgrade
- 
