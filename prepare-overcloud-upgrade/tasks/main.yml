@@ -12,6 +12,7 @@
        
   - name: Verify the existence of the new images
     shell: |
+        source ~/stackrc
         openstack image list
     register: results_image_list
   - debug:
