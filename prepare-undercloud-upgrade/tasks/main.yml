@@ -3,15 +3,18 @@
         source ~/stackrc
         sudo docker login registry.redhat.io --username envops --password 'Unix_11!'
         sudo openstack overcloud container image prepare --namespace=registry.redhat.io/rhosp13 --prefix=openstack- --tag-from-label {version}-{release} --output-env-file=/home/stack/templates/overcloud_images.yaml
+    register: results_overcloud_images
+  - debug:
+      var: results_overcloud_images.stdout_lines
 
   - name: Insert docker credentionals 
     ansible.builtin.blockinfile:
       path: /home/stack/templates/overcloud_images.yaml
-      block: |2
-          ContainerImageRegistryLogin: true
-          ContainerImageRegistryCredentials:
-            registry.redhat.io:
-              envops: 'Unix_11!'
+      block: |
+        ContainerImageRegistryLogin: true
+        ContainerImageRegistryCredentials:
+          registry.redhat.io:
+            envops: 'Unix_11!'
 
   - name: Show overcloud_images.yaml
     shell: |
@@ -22,4 +25,5 @@
 
   - name: Verify validation results
     pause:
+      seconds: 5
       prompt: Please check overcloud_images.yaml! Press return to continue. Press Ctrl+c and then "a" to abort
