@@ -21,8 +21,7 @@
             - name: Add defroute
               ansible.builtin.lineinfile:
                 path: /etc/sysconfig/network-scripts/ifcfg-eth1
-                line:
-                  DEFROUTE=yes
+                line: DEFROUTE=yes
               become: true
 
   - name: Run playbook
