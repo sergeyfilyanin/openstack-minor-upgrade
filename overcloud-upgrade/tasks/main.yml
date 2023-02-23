@@ -18,7 +18,6 @@
         - hosts: all
           gather_facts: false
           tasks:
- 
             - name: Add defroute
               ansible.builtin.blockinfile:
                 path: /etc/sysconfig/network-scripts/ifcfg-eth1
@@ -26,14 +25,14 @@
                   DEFROUTE=yes
               become: true
               
-            - name: Add defroute
+            - name: Add defroute 2
               ansible.builtin.blockinfile:
                 path: /etc/sysconfig/network-scripts/ifcfg-eth0
                 block: |
                   DEFROUTE=no
               become: true
  
-            - name: Add defroute
+            - name: Add defroute 3
               ansible.builtin.blockinfile:
                 path: /etc/sysconfig/network-scripts/ifcfg-br-ex
                 block: |
