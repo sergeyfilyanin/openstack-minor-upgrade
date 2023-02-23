@@ -1,13 +1,17 @@
   - name: Update the python-tripleoclient package 
     shell: |
         sudo yum update -y python-tripleoclient
-      
+    register: results
+  - debug:
+      var: results.stdout_lines
+             
   - name: Upgrade director
     shell: |
         openstack undercloud upgrade -y --log-file undercloud_minor_upgrade.log
 
   - name: Reboot approve 
     pause:
+      seconds: 10
       prompt: Please approve undercloud reboot! Press return to continue. Press Ctrl+c and then "a" to abort
 
   - name: Reboot after upgrade NIC names
