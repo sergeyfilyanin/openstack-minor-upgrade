@@ -21,23 +21,23 @@
  
             - name: Add defroute
               ansible.builtin.blockinfile:
-              path: /etc/sysconfig/network-scripts/ifcfg-eth1
-              block: |
-                DEFROUTE=yes
+                path: /etc/sysconfig/network-scripts/ifcfg-eth1
+                block: |
+                  DEFROUTE=yes
               become: true
               
             - name: Add defroute
               ansible.builtin.blockinfile:
-              path: /etc/sysconfig/network-scripts/ifcfg-eth0
-              block: |
-                DEFROUTE=no
+                path: /etc/sysconfig/network-scripts/ifcfg-eth0
+                block: |
+                  DEFROUTE=no
               become: true
  
             - name: Add defroute
               ansible.builtin.blockinfile:
-              path: /etc/sysconfig/network-scripts/ifcfg-br-ex
-              block: |
-                DEFROUTE=no
+                path: /etc/sysconfig/network-scripts/ifcfg-br-ex
+                block: |
+                  DEFROUTE=no
               become: true
               
             - name: Restart network
