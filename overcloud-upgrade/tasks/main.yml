@@ -19,9 +19,9 @@
           gather_facts: false
           tasks:
             - name: Add defroute
-              ansible.builtin.blockinfile:
+              ansible.builtin.lineinfile:
                 path: /etc/sysconfig/network-scripts/ifcfg-eth1
-                block: |
+                line:
                   DEFROUTE=yes
               become: true
               
