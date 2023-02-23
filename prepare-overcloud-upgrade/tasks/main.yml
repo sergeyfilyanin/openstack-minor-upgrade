@@ -27,11 +27,11 @@
         source ~/stackrc
         touch ~/templates/updates-environment.yaml
 
-  - name: Clear your database entries
-    shell: |
-        sudo docker exec -u 42436 -ti nova_api_cron bash
-        nova-manage db archive_deleted_rows --max_rows 1000
-        exit
+#  - name: Clear your database entries
+#    shell: |
+#        sudo docker exec -u 42436 -ti nova_api_cron bash
+#        nova-manage db archive_deleted_rows --max_rows 1000
+#        exit
 
   - name: Edit updates-environment.yaml
     ansible.builtin.blockinfile:
