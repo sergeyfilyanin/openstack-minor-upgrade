@@ -19,7 +19,7 @@
           gather_facts: false
           tasks:
  
-             - name: Add defroute
+            - name: Add defroute
               ansible.builtin.blockinfile:
               path: /etc/sysconfig/network-scripts/ifcfg-eth1
               block: |
