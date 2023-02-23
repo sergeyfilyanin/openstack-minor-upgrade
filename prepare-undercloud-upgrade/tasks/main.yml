@@ -25,5 +25,5 @@
 
   - name: Verify validation results
     pause:
-      seconds: 5
+      seconds: 10
       prompt: Please check overcloud_images.yaml! Press return to continue. Press Ctrl+c and then "a" to abort
