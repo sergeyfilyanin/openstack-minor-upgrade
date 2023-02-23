@@ -66,6 +66,11 @@
         - hosts: all
           gather_facts: false
           tasks:
+            - name: Register subscriptions
+              shell:
+                sudo subscription-manager register --username envops --password 'Unix_11!'
+              become: true
+              
             - name: Pre-download all packages on all overcloud nodes
               shell:
                 yum upgrade -y --downloadonly
