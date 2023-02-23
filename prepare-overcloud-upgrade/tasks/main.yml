@@ -20,6 +20,7 @@
 
   - name: Verify results
     pause:
+      seconds: 10
       prompt: Please check openstack image list! Press return to continue. Press Ctrl+c and then "a" to abort
 
   - name: Create update env file
@@ -49,6 +50,7 @@
 
   - name: Verify results
     pause:
+      seconds: 10
       prompt: Please check updates environment yaml! Press return to continue. Press Ctrl+c and then "a" to abort
 
   - name: Create update env file
