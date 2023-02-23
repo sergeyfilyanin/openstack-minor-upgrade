@@ -72,4 +72,4 @@
   - name: Run playbook
     shell: |
         source ~/stackrc
-        ansible-playbook -i ~/inventory.yaml -f 20 ~/yum-download-only.yaml --limit Controller,Compute,CephStorage
+        ansible-playbook -i ~/inventory.yaml -f 20 ~/yum-download-only.yaml --limit Controller,Compute,CephStorage >> ansible-update-env.log
