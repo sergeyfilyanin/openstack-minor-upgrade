@@ -69,7 +69,7 @@
             - name: Register subscriptions
               shell:
                 subscription-manager register --username envops --password 'Unix_11!'
-                subscription-manager attach --pool=2c94dfeb8650d275018674dcfcc007f2
+                subscription-manager attach --pool='2c94dfeb8650d275018674dcfcc007f2'
                 subscription-manager repos --disable=*
                 subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-rh-common-rpms --enable=rhel-ha-for-rhel-7-server-rpms --enable=rhel-7-server-openstack-13-rpms
               become: true
