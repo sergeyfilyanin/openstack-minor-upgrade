@@ -5,6 +5,6 @@
 
 
   roles:
- #   - prepare-undercloud-upgrade
- #   - undercloud-upgrade
-    - healtcheck
+    - prepare-undercloud-upgrade
+    - undercloud-upgrade
+ 
