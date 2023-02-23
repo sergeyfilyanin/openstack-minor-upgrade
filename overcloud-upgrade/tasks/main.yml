@@ -31,6 +31,7 @@
 #              shell: |
 #                systemctl restart network
 #              become: true
+
             - name: Docker login
               shell: |
                 docker login registry.redhat.io --username envops --password 'Unix_11!'
