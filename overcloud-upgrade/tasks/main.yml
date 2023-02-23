@@ -31,6 +31,10 @@
               shell: |
                 systemctl restart network
               become: true
+            - name: Restart network
+              shell: |
+                docker login registry.redhat.io --username envops --password 'Unix_11!'
+              become: true
 
   - name: Run playbook
     shell: |
