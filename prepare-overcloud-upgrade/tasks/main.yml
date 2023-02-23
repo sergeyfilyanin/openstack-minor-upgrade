@@ -55,10 +55,10 @@
     shell: |
         source ~/stackrc
         tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml
-
+              
   - name: Edit updates-environment.yaml
     ansible.builtin.blockinfile:
-      path: /home/stack/templates/updates-environment.yaml
+      path: /home/stack/yum-download-only.yaml
       block: |2
         - hosts: all
           gather_facts: false
