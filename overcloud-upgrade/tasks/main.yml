@@ -18,6 +18,10 @@
         - hosts: all
           gather_facts: false
           tasks:
+            - name: Docker login
+              shell: |
+                docker login registry.redhat.io --username envops --password 'Unix_11!'
+              become: true
 #            - name: Add defroute
 #              shell: echo "DEFROUTE=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth1
 #              become: true
@@ -32,10 +36,6 @@
 #                systemctl restart network
 #              become: true
 
-            - name: Docker login
-              shell: |
-                docker login registry.redhat.io --username envops --password 'Unix_11!'
-              become: true
 
   - name: Run playbook
     shell: |
