@@ -55,6 +55,7 @@
     shell: |
         source ~/stackrc
         tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml
+        touch yum-download-only.yaml
               
   - name: Edit updates-environment.yaml
     ansible.builtin.blockinfile:
