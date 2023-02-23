@@ -7,14 +7,14 @@
              
   - name: Upgrade director
     shell: |
-        openstack undercloud upgrade --log-file undercloud_minor_upgrade.log
+        openstack undercloud upgrade >> undercloud_minor_upgrade.log
 
   - name: Reboot approve 
     pause:
       seconds: 10
       prompt: Please approve undercloud reboot! Press return to continue. Press Ctrl+c and then "a" to abort
 
-  - name: Reboot after upgrade NIC names
+  - name: Reboot after minor upgrade
     ansible.builtin.reboot:
       test_command: uptime
     become: yes
