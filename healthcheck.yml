@@ -7,7 +7,6 @@
       openstack.cloud.auth:
         cloud: default
         interface: internal
-        verify: "{{ keystone_service_internaluri_insecure | ternary(false, true) }}"
 
     - name: Show service catalog
       debug:
