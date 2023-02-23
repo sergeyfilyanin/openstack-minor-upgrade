@@ -7,7 +7,7 @@
              
   - name: Upgrade director
     shell: |
-        openstack undercloud upgrade -y --log-file undercloud_minor_upgrade.log
+        openstack undercloud upgrade --log-file undercloud_minor_upgrade.log
 
   - name: Reboot approve 
     pause:
@@ -20,3 +20,10 @@
     become: yes
     become_user: root
   - debug: msg="Undercloud was restarted successfully"
+
+  - name: Upgrade director
+    shell: |
+        sudo systemctl list-units 'openstack-*
+    register: results
+  - debug:
+      var: results.stdout_lines
