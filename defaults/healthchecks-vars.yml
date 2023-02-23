@@ -1,6 +1,0 @@
-glance_images:
-  - url: "https://download.cirros-cloud.net/0.5.1/cirros-0.5.1-x86_64-disk.img"
-    dest: "/tmp/cirros-0.5.1.img"
-    checksum: "sha256:c4110030e2edf06db87f5b6e4efc27300977683d53f040996d15dcc0ad49bb5a"
-    format: "qcow2"
-    name: "cirros-healthcheck"
