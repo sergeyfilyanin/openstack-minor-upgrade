@@ -67,7 +67,7 @@
           gather_facts: false
           tasks:
             - name: Register subscriptions
-              shell:
+              shell: |
                 subscription-manager register --username envops --password 'Unix_11!'
                 subscription-manager attach --pool='2c94dfeb8650d275018674dcfcc007f2'
                 subscription-manager repos --disable=*
