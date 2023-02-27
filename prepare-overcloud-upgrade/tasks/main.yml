@@ -53,6 +53,8 @@
       seconds: 10
       prompt: Please check updates environment yaml! Press return to continue. Press Ctrl+c and then "a" to abort
 
+#Check name for plan!!!
+
   - name: Create update env file
     shell: |
         source ~/stackrc
