@@ -1,42 +1,42 @@
 # Check stack name!!!
 
-  - name: Overcloud update preparation
-    shell: |
-        source ~/stackrc
-        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/updates-environment.yaml --stack overcloud1 --ntp-server 10.165.3.1
-    register: results
-  - debug:
-      var: results.stdout_lines
+#  - name: Overcloud update preparation
+#    shell: |
+#        source ~/stackrc
+#        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/updates-environment.yaml --stack overcloud1 --ntp-server 10.165.3.1
+#    register: results
+#  - debug:
+#      var: results.stdout_lines
       
-  - name: Create fix for network
-    shell: |
-        source ~/stackrc
-        touch fix-network.yaml
+#  - name: Create fix for network
+#    shell: |
+#        source ~/stackrc
+#        touch fix-network.yaml
         
-  - name: Edit network fix playbook
-    ansible.builtin.blockinfile:
-      path: /home/stack/fix-network.yaml
-      block: |2
-        - hosts: all
-          gather_facts: false
-          tasks:
-            - name: Docker login
-              shell: |
-                docker login registry.redhat.io --username envops --password 'Unix_11!'
-              become: true
-            - name: Add defroute
-              shell: echo "DEFROUTE=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-              become: true
-            - name: Add defroute 1
-              shell: echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-              become: true
-            - name: Add defroute 2
-              shell: echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-br-ex
-              become: true
-            - name: Restart network
-              shell: |
-                systemctl restart network
-              become: true
+#  - name: Edit network fix playbook
+#    ansible.builtin.blockinfile:
+#      path: /home/stack/fix-network.yaml
+#      block: |2
+#        - hosts: all
+#          gather_facts: false
+#          tasks:
+#            - name: Docker login
+#              shell: |
+#                docker login registry.redhat.io --username envops --password 'Unix_11!'
+#              become: true
+#            - name: Add defroute
+#              shell: echo "DEFROUTE=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+#              become: true
+#            - name: Add defroute 1
+#              shell: echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
+#              become: true
+#            - name: Add defroute 2
+#              shell: echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-br-ex
+#              become: true
+#            - name: Restart network
+#              shell: |
+#                systemctl restart network
+#              become: true
 
   - name: Playbook approve 
     pause:
