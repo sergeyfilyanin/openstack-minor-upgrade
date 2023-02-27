@@ -8,22 +8,22 @@
 #  - debug:
 #      var: results.stdout_lines
       
-#  - name: Create fix for network
-#    shell: |
-#        source ~/stackrc
-#        touch fix-network.yaml
+  - name: Docker login
+    shell: |
+        source ~/stackrc
+        touch docker-login.yaml
         
-#  - name: Edit network fix playbook
-#    ansible.builtin.blockinfile:
-#      path: /home/stack/fix-network.yaml
-#      block: |2
-#        - hosts: all
-#          gather_facts: false
-#          tasks:
-#            - name: Docker login
-#              shell: |
-#                docker login registry.redhat.io --username envops --password 'Unix_11!'
-#              become: true
+  - name: Run docker login playbook
+    ansible.builtin.blockinfile:
+      path: /home/stack/docker-login.yaml
+      block: |2
+        - hosts: all
+          gather_facts: false
+          tasks:
+            - name: Docker login
+              shell: |
+                docker login registry.redhat.io --username envops --password 'Unix_11!'
+              become: true
 #            - name: Add defroute
 #              shell: echo "DEFROUTE=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth1
 #              become: true
