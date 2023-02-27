@@ -1,12 +1,12 @@
 # Check stack name!!!
 
-#  - name: Overcloud update preparation
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/updates-environment.yaml --stack overcloud1 --ntp-server 10.165.3.1
-#    register: results
-#  - debug:
-#      var: results.stdout_lines
+  - name: Overcloud update preparation
+    shell: |
+        source ~/stackrc
+        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/updates-environment.yaml --stack overcloud1 --ntp-server 10.165.3.1
+    register: results
+  - debug:
+      var: results.stdout_lines
       
 #  - name: Create fix for network
 #    shell: |
