@@ -40,7 +40,7 @@
 
   - name: Playbook approve 
     pause:
-      seconds: 30
+      seconds: 45
       prompt: Please approve fix network playbook! Press return to continue. Press Ctrl+c and then "a" to abort
 
   - name: Run playbook
