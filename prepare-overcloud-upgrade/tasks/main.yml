@@ -56,7 +56,7 @@
   - name: Create update env file
     shell: |
         source ~/stackrc
-        tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml
+        tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml --plan "overcloud1"
         touch yum-download-only.yaml
               
   - name: Edit updates-environment.yaml
