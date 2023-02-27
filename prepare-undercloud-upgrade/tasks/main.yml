@@ -10,11 +10,11 @@
   - name: Insert docker credentionals 
     ansible.builtin.blockinfile:
       path: /home/stack/templates/overcloud_images.yaml
-      block: |
-        ContainerImageRegistryLogin: true
-        ContainerImageRegistryCredentials:
-          registry.redhat.io:
-            envops: 'Unix_11!'
+      block: |2
+          ContainerImageRegistryLogin: true
+          ContainerImageRegistryCredentials:
+            registry.redhat.io:
+              envops: 'Unix_11!'
 
   - name: Show overcloud_images.yaml
     shell: |
