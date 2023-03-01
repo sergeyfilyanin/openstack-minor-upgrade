@@ -6,6 +6,12 @@
     register: results_overcloud_images
   - debug:
       var: results_overcloud_images.stdout_lines
+      
+  - name: Replace container source
+    replace:
+      path: /home/stack/templates/overcloud_images.yaml
+      regexp: 'registry.redhat.io'
+      replace: '10.165.3.14:8787'
 
   - name: Insert docker credentionals 
     ansible.builtin.blockinfile:
