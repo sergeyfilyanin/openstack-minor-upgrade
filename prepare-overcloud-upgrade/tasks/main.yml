@@ -34,12 +34,6 @@
 #        nova-manage db archive_deleted_rows --max_rows 1000
 #        exit
 
-  - name: Edit updates-environment.yaml
-    ansible.builtin.blockinfile:
-      path: /home/stack/templates/updates-environment.yaml
-      block: |2
-          parameter_defaults:
-            DockerPuppetProcessCount: 8
 
   - name: Verify updates-environment.yaml
     shell: |
