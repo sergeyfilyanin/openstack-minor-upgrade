@@ -49,10 +49,10 @@
 #        export ANSIBLE_HOST_KEY_CHECKING=False
 #        ansible-playbook -i ~/inventory.yaml -f 20 ~/fix-network.yaml --limit Controller >> ansible-update-network.log
 
-  - name: Overcloud update
-    shell: |
-        source ~/stackrc
-        openstack overcloud update run --nodes Controller    
-    register: results
-  - debug:
-      var: results.stdout_lines
+#  - name: Overcloud update
+#    shell: |
+#        source ~/stackrc
+#        openstack overcloud update run --nodes Controller    
+#    register: results
+#  - debug:
+#      var: results.stdout_lines
