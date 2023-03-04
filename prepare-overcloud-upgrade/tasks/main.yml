@@ -7,6 +7,7 @@
   - name: Updating the overcloud images
     shell: |
         source ~/stackrc
+        virt-customize -a overcloud-full.qcow2 --root-password password:Unix_11!
         openstack overcloud image upload --update-existing --image-path /home/stack/images/
         openstack overcloud node configure $(openstack baremetal node list -c UUID -f value)
        
