@@ -3,7 +3,7 @@
   - name: Overcloud update preparation
     shell: |
         source ~/stackrc
-        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node_info.yaml -r /home/stack/templates/roles_data.yaml --ntp-server 10.165.3.1 --control-flavor control --compute-flavor compute
+        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node_info.yaml -e /home/stack/templates/network-environment.yaml -e /home/stack/templates/glance_nfs.yaml -e /home/stack/templates/cinder_nfs.yaml --overcloud-ssh-user heat-admin --overcloud-ssh-key ~/.ssh/id_rsa -r /home/stack/templates/roles_data.yaml --ntp-server 10.165.3.1 --libvirt-type qemu --control-flavor control --compute-flavor compute
       
   - name: Docker login
     shell: |
