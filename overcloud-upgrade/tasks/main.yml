@@ -57,7 +57,7 @@
   - name: Overcloud update
     shell: |
         source ~/stackrc
-        openstack overcloud update run --nodes Compute    
+        openstack overcloud update run --nodes Compute-s    
     register: results
   - debug:
       var: results.stdout_lines
