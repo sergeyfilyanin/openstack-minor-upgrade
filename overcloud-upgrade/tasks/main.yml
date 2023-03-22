@@ -1,26 +1,26 @@
 # Check stack name!!!
 
-#  - name: Overcloud update preparation
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node_info.yaml -e /home/stack/templates/network-environment.yaml -e /home/stack/templates/glance_nfs.yaml -e /home/stack/templates/cinder_nfs.yaml --overcloud-ssh-user heat-admin --overcloud-ssh-key ~/.ssh/id_rsa -r /home/stack/templates/roles_data.yaml --ntp-server 10.165.3.1 --libvirt-type qemu
+  - name: Overcloud update preparation
+    shell: |
+        source ~/stackrc
+        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node_info.yaml -e /home/stack/templates/network-environment.yaml -e /home/stack/templates/glance_nfs.yaml -e /home/stack/templates/cinder_nfs.yaml --overcloud-ssh-user heat-admin --overcloud-ssh-key ~/.ssh/id_rsa -r /home/stack/templates/roles_data.yaml --ntp-server 10.165.3.1 --libvirt-type qemu
       
-#  - name: Docker login
-#    shell: |
-#        source ~/stackrc
-#        touch docker-login.yaml
+  - name: Docker login
+    shell: |
+        source ~/stackrc
+        touch docker-login.yaml
         
-#  - name: Run docker login playbook
-#    ansible.builtin.blockinfile:
-#      path: /home/stack/docker-login.yaml
-#      block: |2
-#        - hosts: all
-#          gather_facts: false
-#          tasks:
-#            - name: Docker login
-#              shell: |
-#                docker login registry.redhat.io --username envops --password 'Unix_11!'
-#              become: true
+  - name: Run docker login playbook
+    ansible.builtin.blockinfile:
+      path: /home/stack/docker-login.yaml
+      block: |2
+        - hosts: all
+          gather_facts: false
+          tasks:
+            - name: Docker login
+              shell: |
+                docker login registry.redhat.io --username envops --password 'Unix_11!'
+              become: true
 #            - name: Add defroute
 #              shell: echo "DEFROUTE=yes" >> /etc/sysconfig/network-scripts/ifcfg-eth1
 #              become: true
@@ -35,24 +35,24 @@
 #                systemctl restart network
 #              become: true
 
-#  - name: Playbook approve 
-#    pause:
-#      seconds: 15
-#      prompt: Please approve fix network playbook! Press return to continue. Press Ctrl+c and then "a" to abort
+  - name: Playbook approve 
+    pause:
+      seconds: 15
+      prompt: Please approve fix network playbook! Press return to continue. Press Ctrl+c and then "a" to abort
 
-#  - name: Run playbook
-#    shell: |
-#        source ~/stackrc
-#        export ANSIBLE_HOST_KEY_CHECKING=False
-#        ansible-playbook -i ~/inventory.yaml -f 20 ~/fix-network.yaml --limit Controller >> ansible-update-network.log
+  - name: Run playbook
+    shell: |
+        source ~/stackrc
+        export ANSIBLE_HOST_KEY_CHECKING=False
+        ansible-playbook -i ~/inventory.yaml -f 20 ~/fix-network.yaml --limit Controller >> ansible-update-network.log
 
-#  - name: Overcloud update
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update run --nodes Controller    
-#    register: results
-#  - debug:
-#      var: results.stdout_lines
+  - name: Overcloud update
+    shell: |
+        source ~/stackrc
+        openstack overcloud update run --nodes Controller    
+    register: results
+  - debug:
+      var: results.stdout_lines
  
   - name: Overcloud update
     shell: |
@@ -62,10 +62,10 @@
   - debug:
       var: results.stdout_lines
 
-#  - name: Overcloud update
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update run --nodes Compute-m   
-#    register: results
-#  - debug:
-#      var: results.stdout_lines
+  - name: Overcloud update
+    shell: |
+        source ~/stackrc
+        openstack overcloud update run --nodes Compute-m   
+    register: results
+  - debug:
+      var: results.stdout_lines
