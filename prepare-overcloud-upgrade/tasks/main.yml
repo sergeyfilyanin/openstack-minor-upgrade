@@ -80,4 +80,4 @@
     shell: |
         source ~/stackrc
         export ANSIBLE_HOST_KEY_CHECKING=False
-        ansible-playbook -i ~/inventory.yaml -f 20 ~/yum-download-only.yaml --limit Controller,Compute
+        ansible-playbook -i ~/inventory.yaml -f 20 ~/yum-download-only.yaml --limit Controller,Compute-s,Compute-m
