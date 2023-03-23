@@ -1,75 +1,75 @@
-#  - name: Prepare for update for overcloud images
-#    shell: |
-#        rm -rf ~/images/*
-#        cd ~/images
-#        for i in /usr/share/rhosp-director-images/overcloud-full-latest-13.0.tar /usr/share/rhosp-director-images/ironic-python-agent-latest-13.0.tar; do tar -xvf $i; done
+  - name: Prepare for update for overcloud images
+    shell: |
+        rm -rf ~/images/*
+        cd ~/images
+        for i in /usr/share/rhosp-director-images/overcloud-full-latest-13.0.tar /usr/share/rhosp-director-images/ironic-python-agent-latest-13.0.tar; do tar -xvf $i; done
         
-#  - name: Updating the overcloud images
-#    shell: |
-#        source ~/stackrc
-#        virt-customize -a images/overcloud-full.qcow2 --root-password password:Unix_11!
-#        openstack overcloud image upload --update-existing --image-path /home/stack/images/
-#        openstack overcloud node configure $(openstack baremetal node list -c UUID -f value)
+  - name: Updating the overcloud images
+    shell: |
+        source ~/stackrc
+        virt-customize -a images/overcloud-full.qcow2 --root-password password:Unix_11!
+        openstack overcloud image upload --update-existing --image-path /home/stack/images/
+        openstack overcloud node configure $(openstack baremetal node list -c UUID -f value)
        
-#  - name: Verify the existence of the new images
-#    shell: |
-#        source ~/stackrc
-#        openstack image list
-#    register: results_image_list
-#  - debug:
-#      var: results_image_list.stdout_lines
+  - name: Verify the existence of the new images
+    shell: |
+        source ~/stackrc
+        openstack image list
+    register: results_image_list
+  - debug:
+      var: results_image_list.stdout_lines
 
-#  - name: Verify results
-#    pause:
-#      seconds: 10
-#      prompt: Please check openstack image list! Press return to continue. Press Ctrl+c and then "a" to abort
+  - name: Verify results
+    pause:
+      seconds: 10
+      prompt: Please check openstack image list! Press return to continue. Press Ctrl+c and then "a" to abort
 
-#  - name: Create update env file
-#    shell: |
-#        source ~/stackrc
-#        touch ~/templates/updates-environment.yaml
+  - name: Create update env file
+    shell: |
+        source ~/stackrc
+        touch ~/templates/updates-environment.yaml
 
 
 
-#  - name: Verify updates-environment.yaml
-#    shell: |
-#        cat /home/stack/templates/updates-environment.yaml
-#    register: results_env
-#  - debug:
-#      var: results_env.stdout_lines
+  - name: Verify updates-environment.yaml
+    shell: |
+        cat /home/stack/templates/updates-environment.yaml
+    register: results_env
+  - debug:
+      var: results_env.stdout_lines
 
-#  - name: Verify results
-#    pause:
-#      seconds: 10
-#      prompt: Please check updates environment yaml! Press return to continue. Press Ctrl+c and then "a" to abort
+  - name: Verify results
+    pause:
+      seconds: 10
+      prompt: Please check updates environment yaml! Press return to continue. Press Ctrl+c and then "a" to abort
 
 #Check name for plan!!!
 
-#  - name: Create update env file
-#    shell: |
-#        source ~/stackrc
-#        tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml
-#        touch yum-download-only.yaml
+  - name: Create update env file
+    shell: |
+        source ~/stackrc
+        tripleo-ansible-inventory --ansible_ssh_user heat-admin --static-yaml-inventory ~/inventory.yaml
+        touch yum-download-only.yaml
               
-#  - name: Edit updates-environment.yaml
-#    ansible.builtin.blockinfile:
-#      path: /home/stack/yum-download-only.yaml
-#      block: |2
-#        - hosts: all
-#          gather_facts: false
-#          tasks:
-#            - name: Register subscriptions
-#              shell: |
-#                subscription-manager register --username envops --password 'Unix_11!'
-#                subscription-manager attach --pool='2c94dfeb8650d275018674dcfcc007f2'
-#                subscription-manager repos --disable=*
-#                subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-rh-common-rpms --enable=rhel-ha-for-rhel-7-server-rpms --enable=rhel-7-server-openstack-13-rpms
-#              become: true
+  - name: Edit updates-environment.yaml
+    ansible.builtin.blockinfile:
+      path: /home/stack/yum-download-only.yaml
+      block: |2
+        - hosts: all
+          gather_facts: false
+          tasks:
+            - name: Register subscriptions
+              shell: |
+                subscription-manager register --username envops --password 'Unix_11!'
+                subscription-manager attach --pool='2c94dfeb8650d275018674dcfcc007f2'
+                subscription-manager repos --disable=*
+                subscription-manager repos --enable=rhel-7-server-rpms --enable=rhel-7-server-extras-rpms --enable=rhel-7-server-rh-common-rpms --enable=rhel-ha-for-rhel-7-server-rpms --enable=rhel-7-server-openstack-13-rpms
+              become: true
               
-#            - name: Pre-download all packages on all overcloud nodes
-#              shell:
-#                yum upgrade -y --downloadonly
-#              become: true
+            - name: Pre-download all packages on all overcloud nodes
+              shell:
+                yum upgrade -y --downloadonly
+              become: true
 
   - name: Run playbook
     shell: |
