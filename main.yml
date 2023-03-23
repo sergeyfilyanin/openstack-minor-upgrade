@@ -7,5 +7,5 @@
   roles:
 #    - prepare-undercloud-upgrade
 #    - undercloud-upgrade
-#    - prepare-overcloud-upgrade
+    - prepare-overcloud-upgrade
     - overcloud-upgrade
