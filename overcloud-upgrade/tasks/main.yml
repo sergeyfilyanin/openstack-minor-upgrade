@@ -1,9 +1,9 @@
 # Check stack name!!!
 
-#  - name: Overcloud update preparation
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node_info.yaml -e /home/stack/templates/network-environment.yaml -e /home/stack/templates/glance_nfs.yaml -e /home/stack/templates/cinder_nfs.yaml --overcloud-ssh-user heat-admin --overcloud-ssh-key ~/.ssh/id_rsa -r /home/stack/templates/roles_data.yaml --ntp-server 10.165.3.1 --libvirt-type qemu
+  - name: Overcloud update preparation
+    shell: |
+        source ~/stackrc
+        openstack overcloud update prepare --templates -e /home/stack/templates/overcloud_images.yaml -e /home/stack/templates/node_info.yaml -e /home/stack/templates/network-environment.yaml -e /home/stack/templates/glance_nfs.yaml -e /home/stack/templates/cinder_nfs.yaml --overcloud-ssh-user heat-admin --overcloud-ssh-key ~/.ssh/id_rsa -r /home/stack/templates/roles_data.yaml --ntp-server 10.165.3.1 --libvirt-type qemu
       
   - name: Docker login
     shell: |
@@ -46,21 +46,21 @@
 #        export ANSIBLE_HOST_KEY_CHECKING=False
 #        ansible-playbook -i ~/inventory.yaml -f 20 ~/fix-network.yaml --limit Controller >> ansible-update-network.log
 
-#  - name: Overcloud update Controller
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update run --nodes Controller    
-#    register: results
-#  - debug:
-#      var: results.stdout_lines
+  - name: Overcloud update Controller
+    shell: |
+        source ~/stackrc
+        openstack overcloud update run --nodes Controller    
+    register: results
+  - debug:
+      var: results.stdout_lines
  
-#  - name: Overcloud update Compute-s
-#    shell: |
-#        source ~/stackrc
-#        openstack overcloud update run --nodes Compute-s   
-#    register: results
-#  - debug:
-#      var: results.stdout_lines
+  - name: Overcloud update Compute-s
+    shell: |
+        source ~/stackrc
+        openstack overcloud update run --nodes Compute-s   
+    register: results
+  - debug:
+      var: results.stdout_lines
 
   - name: Overcloud update Compute-m
     shell: |
