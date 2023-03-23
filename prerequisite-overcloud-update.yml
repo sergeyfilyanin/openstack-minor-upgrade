@@ -1,0 +1,9 @@
+---
+- name: "minor upgrade undercloud"
+  hosts: undercloud
+  become_user: stack
+
+
+  roles:
+    - prepare-overcloud-upgrade
+    - overcloud-upgrade
