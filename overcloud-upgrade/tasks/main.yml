@@ -54,18 +54,18 @@
 #  - debug:
 #      var: results.stdout_lines
  
-  - name: Overcloud update
-    shell: |
-        source ~/stackrc
-        openstack overcloud update run --nodes Compute-s   
-    register: results
-  - debug:
-      var: results.stdout_lines
-
 #  - name: Overcloud update
 #    shell: |
 #        source ~/stackrc
-#        openstack overcloud update run --nodes Compute-m   
+#        openstack overcloud update run --nodes Compute-s   
 #    register: results
 #  - debug:
 #      var: results.stdout_lines
+
+  - name: Overcloud update
+    shell: |
+        source ~/stackrc
+        openstack overcloud update run --nodes Compute-m   
+    register: results
+  - debug:
+      var: results.stdout_lines
